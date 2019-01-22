@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context="com.ldy.accountingapp.MainActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/app_bar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:elevation="0dp"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:id="@+id/amount_layout"
+                android:layout_width="match_parent"
+                android:layout_height="80dp">
+                <com.robinhood.ticker.TickerView
+                    android:id="@+id/amount_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:paddingTop="10dp"
+                    android:text="69.9"
+                    android:textColor="@android:color/white"
+                    android:textSize="60dp"/>
+
+                <TextView
+                    android:id="@+id/currency_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="¥"
+                    android:textSize="60dp"
+                    android:textColor="@android:color/white"
+                    android:layout_alignTop="@id/amount_text"
+                    android:layout_toEndOf="@id/amount_text"
+                    android:layout_toRightOf="@id/amount_text"
+                    android:gravity="center"/>
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/date_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="一月6日"
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_below="@id/amount_layout"
+                android:layout_centerHorizontal="true"
+                android:textStyle="bold"/>
+
+        </RelativeLayout>
+    </android.support.design.widget.AppBarLayout>
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_anchor="@id/app_bar_layout"
+        app:layout_anchorGravity="bottom|end"
+        android:layout_margin="24dp"
+        android:src="@drawable/baseline_add_black_24"
+        />
+
+    <include layout="@layout/content_main"/>
+
+
+</android.support.design.widget.CoordinatorLayout>
