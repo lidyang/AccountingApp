@@ -6,6 +6,7 @@
 
     <ImageView
         android:id="@+id/category_image"
+        android:padding="5dp"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:background="@drawable/circle"
@@ -24,6 +25,7 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/remark_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="phone"

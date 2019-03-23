@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import com.ldy.accountingapp.RecordBean;
 import com.ldy.accountingapp.database.RecordDatabaseSchema.RecordTable;
@@ -20,24 +21,25 @@ public class RecordDatabaseHelper extends SQLiteOpenHelper {
 
     private static String TAG = "RecordDatabaseHelper";
 
-    private static final  String DB_NAME = "record";
+    public static final  String DB_NAME = "record";
 
 //    private SQLiteDatabase mDatabase = getWritableDatabase();
 
     //创建数据库SQL语句
     private static final  String CREATE_RECORD_DB = "create table "+RecordDatabaseHelper.DB_NAME+"("
-            + "id integer primary key autoincrement"
-            +"uuid text,"
-            +"type integer,"
-            +"category text,"
-            +"remark text,"
-            +"amount double,"
-            +"time integer,"
-            +"date date";
+            + "id integer primary key autoincrement, "
+            +"uuid text, "
+            +"type integer, "
+            +"category text, "
+            +"remark text, "
+            +"amount double, "
+            +"time integer, "
+            +"date date)";
 
 
     public RecordDatabaseHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
+        Log.d(TAG,"database initial!!!");
     }
 
     @Override
@@ -54,6 +56,7 @@ public class RecordDatabaseHelper extends SQLiteOpenHelper {
     public void addRecord(RecordBean bean){
         SQLiteDatabase db = getWritableDatabase();
         db.insert(RecordTable.NAME,null,getContentValues(bean));
+        Log.d(TAG,"add record "+bean.getUuid());
     }
 
     public void removeRecord(String uuid){
@@ -80,13 +83,13 @@ public class RecordDatabaseHelper extends SQLiteOpenHelper {
 
         SQLiteDatabase db = getWritableDatabase();
 
-        Cursor cursor = db.rawQuery("select DISTINCE * from record where date = ? order by time asc",
+        Cursor cursor = db.rawQuery("select DISTINCT * from record where date = ? order by time asc",
                 new String[]{dateStr});
 
         cursor.moveToFirst();
         while(!cursor.isAfterLast()){
             String uuid = cursor.getString(cursor.getColumnIndex("uuid"));
-            int type = cursor.getInt(cursor.getColumnIndex("int"));
+            int type = cursor.getInt(cursor.getColumnIndex("type"));
             String category = cursor.getString(cursor.getColumnIndex("category"));
             String remark = cursor.getString(cursor.getColumnIndex("remark"));
             double amount = cursor.getDouble(cursor.getColumnIndex("amount"));
@@ -120,11 +123,11 @@ public class RecordDatabaseHelper extends SQLiteOpenHelper {
 
         SQLiteDatabase db = getWritableDatabase();
 
-        Cursor cursor = db.rawQuery("select DISTINCE * from record order by time asc",
+        Cursor cursor = db.rawQuery("select DISTINCT * from record order by time asc",
                 new String[]{});
         cursor.moveToFirst();
         while(!cursor.isAfterLast()){
-            String date = cursor.getString(cursor.getColumnIndex("data"));
+            String date = cursor.getString(cursor.getColumnIndex("date"));
 
             if(!dates.contains(date)){
                 dates.add(date);

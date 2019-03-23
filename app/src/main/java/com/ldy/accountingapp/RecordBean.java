@@ -4,13 +4,14 @@ import android.util.Log;
 
 import com.ldy.accountingapp.util.DateUtil;
 
+import java.io.Serializable;
 import java.util.UUID;
 
 /**
  * Created by ldy on 19/1/5.
  */
 
-public class RecordBean {
+public class RecordBean implements Serializable {
 
     private static String TAG = "RecordBean";
 
@@ -21,6 +22,8 @@ public class RecordBean {
 
     private String mUuid;
     private double mAmount;
+
+    //1消费 2收入
     private RecordType mType;
     private String mCategory;
     private String mRemark;
